@@ -15,9 +15,8 @@ function calculate_depth_measure(x: string[]) {
     let counter = 0, pos = 0;
 
     while (pos < x.length) {
-        let n1 = parseInt(x[pos]);
-        let n2 = parseInt(x[pos + 1]);
-        if (n1 < n2) counter++;
+        // Current Value < Next Value ?  Yes = Increment : No = Do Nothing.
+        if (parseInt(x[pos]) < parseInt(x[pos + 1])) counter++;
         pos++;
     }
 

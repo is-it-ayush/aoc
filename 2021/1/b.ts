@@ -33,7 +33,7 @@ function calculate_depth_measure(x: string[]) {
                 // Assuming: before we hit a letter, we already have our number. 
                 // Reason: since letters are appended later (every time).
                 const key = lineSplit.charAt(i).toUpperCase().toString();
-                let toSet = list.get(key) as number; // We explicitly defined the keys. It'll always exist.
+                const toSet = list.get(key) as number; // We explicitly defined the keys. It'll always exist.
                 list.set(key, toSet + parseInt(nString));
             }
             else {
