@@ -5,56 +5,32 @@
  * @github is-it-ayush
  */
 
-const input = await Deno.readTextFile("./input2.txt");
+
+const input = await Deno.readTextFile("./input.txt");
+
+// Mimic Input
+// const input = "199\n200\n208\n210\n200\n207\n240\n269\n260\n263"
+
+// Process Input (Split by NewLine)
 const splitInput = input.split("\n");
 
-calculate_depth_measure(splitInput);
+// Calc Depth.
+let result = calculate_depth_measure(splitInput);
+console.log("Total Depth:\t", result);
 
-
-function calculate_depth_measure(x: string[]) {
-    let linePos = 0;
-    let counter = 0;
-
-    const keyString: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    const list: Map<string, number> = new Map<string, number>(keyString.map(i => [i, 0]));
-
-
-    /**
-     * This solution assumes that the file input format is maintained.
-     * Input Format:
-     * <Number> <Char> <Char> ...
-     */
-
-    while (linePos < x.length) {
-        const lineSplit = x[linePos].trim();
-        let nString = "";
-        for (let i = 0; i < lineSplit.length; i++) {
-            if (lineSplit.charCodeAt(i) >= 65 && lineSplit.charCodeAt(i) <= 90) {
-                // Assuming: before we hit a letter, we already have our number. 
-                // Reason: since letters are appended later (every time).
-                const key = lineSplit.charAt(i).toUpperCase().toString();
-                const toSet = list.get(key) as number; // We explicitly defined the keys. It'll always exist.
-                list.set(key, toSet + parseInt(nString));
-            }
-            else {
-                if (lineSplit.charCodeAt(i) !== 32) {
-                    nString += lineSplit.charAt(i);
-                }
-            }
+function calculate_depth_measure(x: string[]): number {
+    let pos = 0, counter = 0;
+    while (pos < x.length) {
+        let n1 = parse_and_add(x[pos], x[pos + 1], x[pos + 2]);    // Can be NaN
+        let n2 = parse_and_add(x[pos + 1], x[pos + 2], x[pos + 3]); // Can be NaN
+        if (n1 && n2) { // NaN Check
+            if (n2 > n1) counter++;
         }
-        linePos++;
+        pos++; // Update while loop
     }
+    return counter;
+}
 
-    // Reusing solution from './a.ts'. (Statement 1) and looping over the array created from the map values.
-    let pos = 0;
-    const onlyValues: number[] = Array.from(list.values());
-    while (pos < onlyValues.length) {
-        if (onlyValues[pos] != 0) { // Optimization 1: We don't need to loop over 0 values.
-            // Current Value < Next Value ?  Yes = Increment : No = Do Nothing.
-            if (onlyValues[pos] < onlyValues[pos + 1]) counter++;
-        }
-        pos++;
-    }
-
-    console.log(counter);
+function parse_and_add(a: string, b: string, c: string): number {
+    return parseInt(a) + parseInt(b) + parseInt(c);
 }
