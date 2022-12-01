@@ -1,26 +1,25 @@
+// Input and Input Process
 const input = await Deno.readTextFile("./input.txt");
 const splitInput = input.trim().split("\r\n\r\n");
-console.log("Max: ", calculate_most_calories(splitInput))
 
+// Call & Output
+console.log("Sum (First Three): ", calculate_most_calories(splitInput))
 
+// Calculate
 function calculate_most_calories(x: string[]): number {
-    let ipos = 0, first_three_sum = 0, max = 0;
+    let pos = 0, first_three_sum = 0;
     let all_max: number[] = [];
-    while (ipos < x.length) {
-        let lineSum = sum_line(x[ipos]);
+    while (pos < x.length) {
+        const lineSum = sum_line(x[pos]);
         all_max.push(lineSum);
-        ipos++;
+        pos++;
     }
     all_max = all_max.sort((n1, n2) => n1 < n2 ? 1 : -1)
     first_three_sum = all_max[0] + all_max[1] + all_max[2];
-    console.log(first_three_sum)
-    return max;
+    return first_three_sum;
 }
 
-
-
-
-
+// Return sum of all the numbers in line Separated by Whitespace.
 function sum_line(x: string) {
     x = x.replaceAll("\r\n", " ");
     const numStr = x.split(" ");
