@@ -53,3 +53,18 @@ function calculate_initial_score(x: string) {
         return 3;
     }
 }
+
+
+/**
+ * --todo-- test the code below
+ * x.reduce((acc, curr) => {
+        const [move, opp] = curr.split(" ");
+        if (move === opp) {
+            return acc + 2;
+        }
+        if (move === "A" && opp === "Y" || move === "B" && opp === "Z" || move === "C" && opp === "X") {
+            return acc + 6;
+        }
+        return acc;
+    }, 0);
+ */

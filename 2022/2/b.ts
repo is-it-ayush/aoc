@@ -10,14 +10,21 @@ function solve(x: string[]) {
         // A is rock, B is paper, C is scissors
         // X is rock, Y is paper, Z is scissors
 
-        let move = x[pos].split(" ");
+        // X = LOSE, Y = DRAW, Z = WIN
+
+        const move = x[pos].split(" ");
         let round_score = calculate_initial_score(move[1]) as number;
-        if (move[1] === 'X') {
-            // Lose
+        let draw_total: number;
+        if (move[1] === 'Z') {
+            // Win
+            
+            if (did_win(move[0], move[1])) {
+                round_score += 6;
+            }
         }
-        let draw_total = calculate_draw(move[0], move[1]) as number;
-        if (did_win(move[0], move[1])) {
-            round_score += 6;
+        else if (move[1] === 'Y') {
+            // Draw
+            draw_total = calculate_draw(move[0], move[1]) as number;
         }
         my_score += (round_score + draw_total);
         pos++;
