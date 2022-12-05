@@ -13,53 +13,25 @@ function solve(x: string[]) {
         // X = LOSE, Y = DRAW, Z = WIN
 
         const move = x[pos].split(" ");
-        let round_score = calculate_initial_score(move[1]) as number;
-        let draw_total: number;
-        if (move[1] === 'Z') {
-            // Win
-            
-            if (did_win(move[0], move[1])) {
-                round_score += 6;
-            }
-        }
-        else if (move[1] === 'Y') {
-            // Draw
-            draw_total = calculate_draw(move[0], move[1]) as number;
-        }
-        my_score += (round_score + draw_total);
+        let round_score = getScore(move[0], move[1]) as number;
+        console.log("Round score:\t", round_score);
+        my_score += round_score;
         pos++;
     }
-
     return my_score;
 }
 
-function calculate_draw(a: string, b: string) {
-    if (a == "A" && b == "X" || a == "B" && b == "Y" || a == "C" && b == "Z") {
-        return 3;
-    }
-    return 0;
-}
-
-function did_win(a: string, b: string) {
-
-    if (a == "A" && b == "Y") {
-        return true;
-    } else if (a == "B" && b == "Z") {
-        return true;
-    } else if (a == "C" && b == "X") {
-        return true;
-    }
-    return false;
-}
-
-function calculate_initial_score(x: string) {
-    if (x == "X") {
-        return 1;
-    }
-    if (x == "Y") {
-        return 2;
-    }
-    if (x == "Z") {
-        return 3;
-    }
-}
+function getScore(opponent: string, outcome: string) {
+    const moves = {
+      "A": "X", // Rock
+      "B": "Y", // Paper
+      "C": "Z", // Scissors
+    };
+    const scores = {
+      "Z": 6, // Win
+      "Y": 3, // Draw
+      "X": 0, // Loss
+    };
+  
+    return scores[outcome];
+  }
