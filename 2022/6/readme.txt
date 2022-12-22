@@ -1,0 +1,1 @@
+it was hard, i couldn't figure it out yet. will do both the parts later.
