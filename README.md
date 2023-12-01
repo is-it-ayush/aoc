@@ -1,15 +1,12 @@
-# advent-of-code
+#### advent-of-code.
 
-To install dependencies:
+aoc really makes me realize i'm not smart as i think i am & i think it's a
+good think. i'm using bun, so do `bun install` & run your solution
+via `bun run ./<year>/<day>/<part>.ts` where you can fill year, day
+and part. these are bad solutions i wrote.
 
-```bash
-bun install
-```
 
-To run:
+#### license
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.14. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+MIT btw. you can do whatever you want with this code. i'm not responsible
+for whatever you do. [read here](./LICENSE.md)
